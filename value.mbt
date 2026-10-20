@@ -122,10 +122,7 @@ fn required(value : Value, key : String) -> Value raise InputError {
 }
 
 ///|
-fn fields_only(
-  value : Value,
-  allowed : Array[String],
-) -> Unit raise InputError {
+fn fields_only(value : Value, allowed : Array[String]) -> Unit raise InputError {
   for key, _ in object(value) {
     if !allowed.contains(key) {
       raise InputError("unknown field: " + key)
