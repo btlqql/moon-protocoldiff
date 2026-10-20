@@ -50,6 +50,10 @@ fn dispatch(request : Value) -> Value raise InputError {
         comparison(old, new, mode, max_pairs, max_steps)
       }
     }
+    "suite" => {
+      fields_only(request, ["operation", "machine", "max_tests"])
+      transition_suite(parse_machine(required(request, "machine")), limit(request, "max_tests", 4096, 4096))
+    }
     "minimize" => {
       fields_only(request, ["operation", "machine"])
       minimize_machine(parse_machine(required(request, "machine")))
