@@ -52,11 +52,17 @@ fn dispatch(request : Value) -> Value raise InputError {
     }
     "audit_suite" => {
       fields_only(request, ["operation", "machine", "tests"])
-      audit_suite(parse_machine(required(request,"machine")), array(required(request,"tests")))
+      audit_suite(
+        parse_machine(required(request, "machine")),
+        array(required(request, "tests")),
+      )
     }
     "suite" => {
       fields_only(request, ["operation", "machine", "max_tests"])
-      transition_suite(parse_machine(required(request, "machine")), limit(request, "max_tests", 4096, 4096))
+      transition_suite(
+        parse_machine(required(request, "machine")),
+        limit(request, "max_tests", 4096, 4096),
+      )
     }
     "minimize" => {
       fields_only(request, ["operation", "machine"])

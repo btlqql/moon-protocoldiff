@@ -22,7 +22,8 @@ fn main {
       let result = @engine.execute(@json.parse(read_input(args[2])))
       println(result.stringify(indent=2))
       let code = match result {
-        { "verdict": "different", .. } | { "verdict": "invalid_difference", .. } => 2
+        { "verdict": "different", .. }
+        | { "verdict": "invalid_difference", .. } => 2
         { "verdict": "unknown", .. } => 3
         { "verdict": "invalid_input", .. } => 64
         _ => 0

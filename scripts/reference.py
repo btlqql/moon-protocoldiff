@@ -30,7 +30,7 @@ def differs(a,b,word,mode):
     return False
 def random_machine(rng):
     states=['s'+str(i) for i in range(rng.randint(1,3))];symbols=['a','b']
-    return dict(states=states,alphabet=symbols,initial=states[0],transitions=[dict(from_=s,input=a,to=rng.choice(states),output=rng.choice([None,0,1,{'ok':True}])) for s in [] for a in []]) if False else {'states':states,'alphabet':symbols,'initial':states[0],'transitions':[{'from':s,'input':a,'to':rng.choice(states),'output':rng.choice([None,0,1,{'ok':True}])} for s in states for a in symbols if rng.random()<.8]}
+    return {'states':states,'alphabet':symbols,'initial':states[0],'transitions':[{'from':s,'input':a,'to':rng.choice(states),'output':rng.choice([None,0,1,{'ok':True}])} for s in states for a in symbols if rng.random()<.8]}
 def main():
     rng=random.Random(20261020);checks=0
     for i in range(60):
