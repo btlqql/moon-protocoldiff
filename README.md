@@ -3,7 +3,7 @@
 A MoonBit library and JSON CLI for comparing **explicit deterministic partial Mealy machines** across protocol versions.
 
 - Owner: **btlqql**; proposed replacement for FindCore.
-- Package: `btlqql/moon_protocoldiff@0.1.0`, Apache-2.0.
+- Package: `btlqql/moon_protocoldiff@0.1.1`, Apache-2.0.
 - Repository: https://github.com/btlqql/moon-protocoldiff
 
 ## Implemented kernel
@@ -23,7 +23,7 @@ moon update
 moon build --target js
 node _build/js/debug/build/cmd/main/main.js examples/session-diff.json
 # exits 2: word ["open","send"] reveals changed output
-moon add btlqql/moon_protocoldiff@0.1.0
+moon add btlqql/moon_protocoldiff@0.1.1
 ```
 
 Import `"btlqql/moon_protocoldiff" @engine` and call `@engine.execute(request)` with `Json`. Returns JSON, including `invalid_input` for invalid models. Pure core supports js, wasm, wasm-gc and native; Node 24 CLI supports JS only. Pass `-` for stdin. CLI exit: 0 successful report/valid difference, 2 behavioral difference/invalid difference witness, 3 unknown, 64 invalid input. A run rejection or incomplete coverage is a report, not a CLI error.
@@ -57,8 +57,11 @@ moon test --target native
 moon build --target js
 node scripts/check.mjs
 python -B scripts/reference.py
+python -B scripts/scale.py
 ```
 
 The Python oracle independently eliminates invalid pairs to a greatest relation instead of calling the MoonBit BFS. Fixed seed 20261020: 60 model pairs, both modes, 437 checks including independent difference execution, exhaustive shorter words, reachable equivalence classes, minimization and transition-cover auditing. Synthetic cases are not production adoption or performance claims. CI runs all four core targets and the CLI/reference gates.
+
+Version 0.1.1 stores BFS parent links and reconstructs the witness only when needed, avoiding a complete input sequence copy for every visited pair. The coprime-cycle scale check visits 16256 reachable pairs and checks explicit budget exhaustion at 100 pairs. This is a bounded scale check, not a throughput benchmark.
 
 Common JSON Value and CLI scaffolding is disclosed in [THIRD_PARTY.md](THIRD_PARTY.md); domain modules are machine.mbt, comparison.mbt, minimize.mbt, suite.mbt, coverage.mbt and api.mbt. Neither repository publication nor MoonCakes publication constitutes competition registration.

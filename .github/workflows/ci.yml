@@ -37,3 +37,4 @@ jobs:
       - run: moon build --target js
       - run: node scripts/check.mjs
       - run: python -B scripts/reference.py
+      - run: python -B scripts/scale.py

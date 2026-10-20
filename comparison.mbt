@@ -2,7 +2,23 @@
 priv struct PairNode {
   left : Int32
   right : Int32
-  word : Array[String]
+  parent : Int32
+  symbol : String
+}
+
+///|
+fn distinguishing_word(
+  queue : Array[PairNode],
+  index : Int32,
+  symbol : String,
+) -> Array[String] {
+  let result = [symbol]
+  let mut current = index
+  while queue[current].parent >= 0 {
+    result.push(queue[current].symbol)
+    current = queue[current].parent
+  }
+  Array::makei(result.length(), i => result[result.length() - 1 - i])
 }
 
 ///|
@@ -23,7 +39,7 @@ fn comparison(
   }
   alphabet.sort_by(lexical_compare)
   let queue : Array[PairNode] = [
-    { left: left.initial, right: right.initial, word: [], },
+    { left: left.initial, right: right.initial, parent: -1, symbol: "", },
   ]
   let seen : Map[String, Bool] = Map([
     (edge_key(left.initial, right.initial.to_string()), true),
@@ -52,9 +68,8 @@ fn comparison(
         (Some(a), Some(b)) => a.output != b.output
         _ => true
       }
-      let word = node.word.copy()
-      word.push(symbol)
       if different {
+        let word = distinguishing_word(queue, cursor - 1, symbol)
         return record([
           ("verdict", String("different")),
           ("mode", String(mode)),
@@ -78,7 +93,12 @@ fn comparison(
               ])
             }
             seen[key] = true
-            queue.push({ left: a.target, right: b.target, word, })
+            queue.push({
+              left: a.target,
+              right: b.target,
+              parent: cursor - 1,
+              symbol,
+            })
           }
         }
         _ => ()
