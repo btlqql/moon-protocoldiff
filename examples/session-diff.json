@@ -1,0 +1,66 @@
+{
+  "old": {
+    "states": [
+      "closed",
+      "open"
+    ],
+    "initial": "closed",
+    "alphabet": [
+      "open",
+      "send",
+      "close"
+    ],
+    "transitions": [
+      {
+        "from": "closed",
+        "input": "open",
+        "to": "open",
+        "output": "ok"
+      },
+      {
+        "from": "open",
+        "input": "send",
+        "to": "open",
+        "output": 0
+      },
+      {
+        "from": "open",
+        "input": "close",
+        "to": "closed",
+        "output": "bye"
+      }
+    ]
+  },
+  "new": {
+    "states": [
+      "closed",
+      "open"
+    ],
+    "initial": "closed",
+    "alphabet": [
+      "open",
+      "send",
+      "close"
+    ],
+    "transitions": [
+      {
+        "from": "closed",
+        "input": "open",
+        "to": "open",
+        "output": "ok"
+      },
+      {
+        "from": "open",
+        "input": "send",
+        "to": "open",
+        "output": 1
+      },
+      {
+        "from": "open",
+        "input": "close",
+        "to": "closed",
+        "output": "bye"
+      }
+    ]
+  }
+}

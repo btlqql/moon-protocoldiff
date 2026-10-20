@@ -1,0 +1,1704 @@
+[
+  {
+    "name": "identical machines",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "equivalent"
+    },
+    "exit": 0
+  },
+  {
+    "name": "delayed output difference",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 1
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "different",
+      "word": [
+        "open",
+        "send"
+      ],
+      "shortest": true
+    },
+    "exit": 2
+  },
+  {
+    "name": "difference verifier",
+    "request": {
+      "operation": "verify_difference",
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 1
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "word": [
+        "open",
+        "send"
+      ]
+    },
+    "expected": {
+      "verdict": "valid_difference"
+    },
+    "exit": 0
+  },
+  {
+    "name": "false difference rejected",
+    "request": {
+      "operation": "verify_difference",
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 1
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "word": [
+        "open"
+      ]
+    },
+    "expected": {
+      "verdict": "invalid_difference"
+    },
+    "exit": 2
+  },
+  {
+    "name": "run rejects undefined",
+    "request": {
+      "operation": "run",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "word": [
+        "send"
+      ]
+    },
+    "expected": {
+      "accepted": false,
+      "rejected_at": 0
+    },
+    "exit": 0
+  },
+  {
+    "name": "run records outputs",
+    "request": {
+      "operation": "run",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "word": [
+        "open",
+        "send",
+        "close"
+      ]
+    },
+    "expected": {
+      "accepted": true,
+      "outputs": [
+        "ok",
+        0,
+        "bye"
+      ]
+    },
+    "exit": 0
+  },
+  {
+    "name": "analyze reachable",
+    "request": {
+      "operation": "analyze",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "reachable": [
+        "closed",
+        "open"
+      ],
+      "missing_transitions": 3
+    },
+    "exit": 0
+  },
+  {
+    "name": "minimized verified",
+    "request": {
+      "operation": "minimize",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "minimized_states": 2,
+      "equivalence_verified": true
+    },
+    "exit": 0
+  },
+  {
+    "name": "transition suite",
+    "request": {
+      "operation": "suite",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "complete",
+      "reachable_transitions": 3,
+      "reset_required": true
+    },
+    "exit": 0
+  },
+  {
+    "name": "suite bound",
+    "request": {
+      "operation": "suite",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "max_tests": 1
+    },
+    "expected": {
+      "verdict": "unknown"
+    },
+    "exit": 3
+  },
+  {
+    "name": "suite audit",
+    "request": {
+      "operation": "audit_suite",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "tests": [
+        [
+          "open",
+          "send",
+          "close"
+        ]
+      ]
+    },
+    "expected": {
+      "complete": true,
+      "covered_transitions": 3
+    },
+    "exit": 0
+  },
+  {
+    "name": "suite missing edge",
+    "request": {
+      "operation": "audit_suite",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "tests": [
+        [
+          "open"
+        ]
+      ]
+    },
+    "expected": {
+      "complete": false,
+      "covered_transitions": 1
+    },
+    "exit": 0
+  },
+  {
+    "name": "suite rejected test",
+    "request": {
+      "operation": "audit_suite",
+      "machine": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "tests": [
+        [
+          "send"
+        ]
+      ]
+    },
+    "expected": {
+      "rejected_tests": [
+        {
+          "test": 0,
+          "rejected_at": 0
+        }
+      ]
+    },
+    "exit": 0
+  },
+  {
+    "name": "pair budget unknown",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "max_pairs": 1
+    },
+    "expected": {
+      "verdict": "unknown"
+    },
+    "exit": 3
+  },
+  {
+    "name": "step budget unknown",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "max_steps": 1
+    },
+    "expected": {
+      "verdict": "unknown"
+    },
+    "exit": 3
+  },
+  {
+    "name": "extension changes equivalence",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          },
+          {
+            "from": "closed",
+            "input": "send",
+            "to": "closed",
+            "output": null
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "different",
+      "word": [
+        "send"
+      ]
+    },
+    "exit": 2
+  },
+  {
+    "name": "extension backward compatible",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          },
+          {
+            "from": "closed",
+            "input": "send",
+            "to": "closed",
+            "output": null
+          }
+        ]
+      },
+      "mode": "backward"
+    },
+    "expected": {
+      "verdict": "compatible"
+    },
+    "exit": 0
+  },
+  {
+    "name": "duplicate state",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "closed"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "empty alphabet",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "undeclared initial",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "no",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "extra machine property",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ],
+        "extra": true
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "nondeterminism rejected",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          },
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "output required",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "mode validated",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "mode": "wrong"
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "unknown option",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "random": true
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  },
+  {
+    "name": "zero budget",
+    "request": {
+      "old": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "new": {
+        "states": [
+          "closed",
+          "open"
+        ],
+        "initial": "closed",
+        "alphabet": [
+          "open",
+          "send",
+          "close"
+        ],
+        "transitions": [
+          {
+            "from": "closed",
+            "input": "open",
+            "to": "open",
+            "output": "ok"
+          },
+          {
+            "from": "open",
+            "input": "send",
+            "to": "open",
+            "output": 0
+          },
+          {
+            "from": "open",
+            "input": "close",
+            "to": "closed",
+            "output": "bye"
+          }
+        ]
+      },
+      "max_pairs": 0
+    },
+    "expected": {
+      "verdict": "invalid_input"
+    },
+    "exit": 64
+  }
+]
