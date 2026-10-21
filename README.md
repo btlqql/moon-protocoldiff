@@ -3,7 +3,7 @@
 A MoonBit library and JSON CLI for comparing **explicit deterministic partial Mealy machines** across protocol versions.
 
 - Owner: **btlqql**; proposed replacement for FindCore.
-- Package: `btlqql/moon_protocoldiff@0.1.1`, Apache-2.0.
+- Package: `btlqql/moon_protocoldiff@0.1.2`, Apache-2.0.
 - Repository: https://github.com/btlqql/moon-protocoldiff
 
 ## Implemented kernel
@@ -23,7 +23,7 @@ moon update
 moon build --target js
 node _build/js/debug/build/cmd/main/main.js examples/session-diff.json
 # exits 2: word ["open","send"] reveals changed output
-moon add btlqql/moon_protocoldiff@0.1.1
+moon add btlqql/moon_protocoldiff@0.1.2
 ```
 
 Import `"btlqql/moon_protocoldiff" @engine` and call `@engine.execute(request)` with `Json`. Returns JSON, including `invalid_input` for invalid models. Pure core supports js, wasm, wasm-gc and native; Node 24 CLI supports JS only. Pass `-` for stdin. CLI exit: 0 successful report/valid difference, 2 behavioral difference/invalid difference witness, 3 unknown, 64 invalid input. A run rejection or incomplete coverage is a report, not a CLI error.
@@ -50,7 +50,7 @@ Models contain `states`, `initial`, `alphabet`, `transitions`; each transition c
 
 ```sh
 moon check --deny-warn --target js
-moon test --target js  # 30 tests, including 26 golden API cases
+moon test --target js  # 32 tests, including 26 golden API cases
 moon test --target wasm
 moon test --target wasm-gc
 moon test --target native
@@ -65,3 +65,7 @@ The Python oracle independently eliminates invalid pairs to a greatest relation 
 Version 0.1.1 stores BFS parent links and reconstructs the witness only when needed, avoiding a complete input sequence copy for every visited pair. The coprime-cycle scale check visits 16256 reachable pairs and checks explicit budget exhaustion at 100 pairs. This is a bounded scale check, not a throughput benchmark.
 
 Common JSON Value and CLI scaffolding is disclosed in [THIRD_PARTY.md](THIRD_PARTY.md); domain modules are machine.mbt, comparison.mbt, minimize.mbt, suite.mbt, coverage.mbt and api.mbt. Neither repository publication nor MoonCakes publication constitutes competition registration.
+
+## Review 2026-10-21 / 0.1.2
+
+Output object keys now have the same65536-unit string boundary as output string values. Added oversized-key rejection and renamed-state / JSON-object-order equivalence tests (32 core tests total;26 golden CLI fixtures retained). [Ecological scope](docs/ecosystem.md) distinguishes protocol comparison from FSM execution and retrieval.

@@ -205,7 +205,10 @@ fn validate_value(
         validate_value(item, depth + 1, nodes)
       }
     Object(items) =>
-      for _, item in items {
+      for key, item in items {
+        if key.length() > 65536 {
+          raise InputError("model object key exceeds 65536 units")
+        }
         validate_value(item, depth + 1, nodes)
       }
     String(s) =>
